@@ -1,0 +1,74 @@
+{% extends "mantenedores/paginaBase.html" %}
+{% load static %}
+
+{% block titulo %}
+<h1 class=" text-center p-3 rounded">Agregar Nuevo Producto</h1>
+{% endblock titulo %}
+
+
+
+{% block contenido %}
+<div class="card mx-auto mb-4 text-bg-dark shadow-lg" style="max-width: 1200px;">
+    <div class="row g-0">
+
+        <div class="col-md-4 d-flex flex-column align-items-center justify-content-center p-3">
+            <img src="{% static 'images/default.jpg' %}" alt="imagen" 
+                 width="200" style="height: auto; display:block; margin-bottom: 10px;">
+            
+            <input type="file" name="imagen" class="form-control">
+        </div>
+
+        <!-- Formulario -->
+        <div class="col-md-8 p-4">
+            <form method="post" action="{% url 'crear_producto' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
+                        {{ form.nombre.errors }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        {{ form.categoria.label_tag }}
+                        {{ form.categoria }}
+                        {{ form.categoria.errors }}
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        {{ form.ingredientes.label_tag }}
+                        {{ form.ingredientes }}
+                        {{ form.ingredientes.errors }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        {{ form.tiempo_produccion.label_tag }}
+                        {{ form.tiempo_produccion }}
+                        {{ form.tiempo_produccion.errors }}
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
+                        {{ form.descripcion.errors }}
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button type="submit" class="btn btn-warning px-4">
+                        <i class="bi bi-plus-circle"></i> Agregar
+                    </button>
+                  
+                 
+                   
+                    <a href="{% url 'mostrar_todos_productos' %}" class="btn btn-outline-danger px-4">
+                        <i class="bi bi-house"></i> Volver
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}

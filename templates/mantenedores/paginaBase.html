@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}Mantenedores{% endblock %}</title>
+
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+        body { scroll-behavior: smooth; background-color: #fff8f5; }
+
+        .navbar { background-color: #b22222 !important; }
+        .navbar-brand img { height: 50px; margin-right: 10px; }
+
+        .card-values { transition: transform 0.3s ease; border: 2px solid #b22222; }
+        .card-values:hover { transform: translateY(-5px); background-color: #fff0f0; }
+
+        footer { background-color: #b22222; color: white; }
+        footer a { color: #ffe5e5; text-decoration: none; }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'mantenedores' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Dulcería Lilis Logo">
+            Dulcería Lilis
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'landing' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'mantenedores' %}">Mantenedores</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="mt-5 pt-5 text-center">
+    {% block titulo %}
+    <h1 class="fw-bold">TÍTULO</h1>
+    {% endblock titulo %}
+</section>
+
+<section class="py-4">
+    <div class="container">
+        {% block contenido %}
+        <div class="alert alert-danger text-center">⚠️ Falta contenido aquí</div>
+        {% endblock contenido %}
+    </div>
+</section>
+
+<footer class="py-4 text-center mt-5">
+    <div class="container">
+        <hr class="my-3 text-white">
+        <p class="mb-0">&copy; 2025 Dulcería Lilis. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

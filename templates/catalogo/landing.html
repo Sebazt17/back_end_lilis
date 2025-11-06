@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dulcería Lilis - Inicio</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+/* ==================== GENERAL ===================== */
+
+body {
+  scroll-behavior: smooth;
+  background-color: #fff8f5;
+}
+
+/* ==================== NAVBAR ===================== */
+
+.navbar {
+  background-color: #b22222 !important;
+}
+
+.navbar-brand img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+/* === Ícono de usuario === */
+.user-icon {
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+/* Sin underline hover */
+.user-icon::after {
+  content: none !important;
+}
+
+/* Efecto al pasar el mouse */
+.user-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* efecto underline animado */
+.nav-link {
+  position: relative;
+  color: white !important;
+  font-weight: 500;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #ffe5e5;
+  transition: width .3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ==================== HERO ===================== */
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(178,34,34,0.7), rgba(178,34,34,0.7)), url("{% static 'images/hero.jpg' %}") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero h1 {
+  font-weight: 700;
+  font-size: 4rem;
+  animation: fadeDown .6s ease-out;
+}
+
+/* Animación */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== SECCIONES CON IMAGEN ===================== */
+
+.section-img-text {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.section-img-text img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.2);
+  transition: transform .4s;
+}
+
+.section-img-text img:hover {
+  transform: scale(1.03);
+}
+
+.section-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #b22222;
+}
+
+/* ==================== ANIMACIÓN SCROLL ===================== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s ease-out, transform .6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== VALORES ===================== */
+
+.card-values {
+  transition: transform 0.3s ease;
+  border: 2px solid #b22222;
+}
+
+.card-values:hover {
+  transform: translateY(-5px);
+  background-color: #fff0f0;
+}
+
+/* ==================== FOOTER ===================== */
+
+footer {
+  background-color: #b22222;
+  color: white;
+}
+
+footer a {
+  color: #ffe5e5;
+  text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ✅ NAVBAR LIMPIO CON ICONO DE USUARIO -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="#inicio">
+      <img src="{% static 'images/logo.png' %}" alt="Logo Dulcería Lilis">
+      Dulcería Lilis
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#historia">Historia</a></li>
+        <li class="nav-item"><a class="nav-link" href="#mision">Misión</a></li>
+        <li class="nav-item"><a class="nav-link" href="#vision">Visión</a></li>
+        <li class="nav-item"><a class="nav-link" href="#valores">Valores</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+
+        <li class="nav-item ms-3">
+          <a href="{% url 'accounts_lilis:login' %}" class="nav-link user-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-person" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              <path fill-rule="evenodd" d="M8 9a5 5 0 0 0-4.546 2.916C3.328 13.584 4.67 14 8 14s4.672-.416 4.546-2.084A5 5 0 0 0 8 9z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ✅ HERO -->
+<header id="inicio" class="hero">
+  <div class="container fade-in">
+    <h1>Bienvenidos a Dulcería Lilis</h1>
+    <p class="lead">Dulces artesanales que combinan tradición e innovación</p>
+  </div>
+</header>
+
+<!-- ✅ HISTORIA (imagen izquierda / texto derecha) -->
+<section id="historia" class="py-5">
+  <div class="container fade-in section-img-text">
+    <img src="{% static 'images/nosotros.jpg' %}" alt="Historia Lilis">
+    <div>
+      <h2 class="section-title">Nuestra Historia</h2>
+      <p class="fs-5">
+        Dulcería Lilis nació en 2017 como un emprendimiento familiar inspirado en recetas tradicionales.
+        La pasión, innovación y compromiso con la calidad nos llevó a expandirnos a nivel nacional e internacional.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ MISIÓN (texto izquierda / imagen derecha) -->
+<section id="mision" class="py-5" style="background-color:#ffeaea;">
+  <div class="container fade-in section-img-text">
+    <div>
+      <h2 class="section-title">Misión</h2>
+      <p class="fs-5">
+          Continuar haciendo lo que amamos: innovar, desarrollar recetas únicas y mantener 
+          una estrecha relación con nuestros clientes. No solo buscamos crecer, sino también 
+          aportar a la sociedad mediante responsabilidad social, cuidado del medio ambiente 
+          y creando oportunidades laborales para mujeres de nuestro país.
+      </p>
+    </div>
+    <img src="{% static 'images/mision.jpg' %}" alt="Misión">
+  </div>
+</section>
+
+<!-- ✅ VISIÓN (imagen izquierda / texto derecha) -->
+<section id="vision" class="py-5">
+  <div class="container fade-in section-img-text">
+    <img src="{% static 'images/vision.jpg' %}" alt="Visión">
+    <div>
+      <h2 class="section-title">Visión</h2>
+      <p class="fs-5">
+        Seremos líderes en la elaboración de productos de calidad superior, conservando siempre nuestra valiosa esencia artesanal.
+        Buscamos llevar este atractivo producto a cada hogar de nuestro país. Y expandirnos globalmente, convirtiéndonos en la elección favorita de familias en todo el mundo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ VALORES -->
+<section id="valores" class="py-5 bg-white fade-in">
+  <div class="container">
+    <h2 class="section-title text-center">Nuestros Valores</h2>
+    <div class="row g-4 text-center">
+      <div class="col-md-3"><div class="card shadow card-values"><div class="card-body"><h5 class="card-title text-danger">Respeto</h5></div></div></div>
+      <div class="col-md-3"><div class="card shadow card-values"><div class="card-body"><h5 class="card-title text-danger">Puntualidad</h5></div></div></div>
+      <div class="col-md-3"><div class="card shadow card-values"><div class="card-body"><h5 class="card-title text-danger">Honestidad</h5></div></div></div>
+      <div class="col-md-3"><div class="card shadow card-values"><div class="card-body"><h5 class="card-title text-danger">Honradez</h5></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ CONTACTO -->
+<section id="contacto" class="py-5" style="background-color:#ffeaea;">
+  <div class="container fade-in">
+    <h2 class="section-title text-center">Contáctanos</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form>
+          <input class="form-control mb-3" placeholder="Nombre">
+          <input type="email" class="form-control mb-3" placeholder="Correo electrónico">
+          <textarea class="form-control mb-3" rows="4" placeholder="Escribe tu mensaje"></textarea>
+          <button type="submit" class="btn btn-danger w-100">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ FOOTER -->
+<footer class="py-4 text-center">
+  <div class="container">
+    <p class="mb-2">Síguenos en redes sociales</p>
+    <a href="https://facebook.com/dulcerialilis" class="btn btn-light me-2" target="_blank">Facebook</a>
+    <a href="https://instagram.com/dulcerialilis" class="btn btn-light" target="_blank">Instagram</a>
+    <hr class="my-3">
+    <p class="mb-0">&copy; 2025 Dulcería Lilis. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  /* Mostrar animaciones al hacer scroll */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  });
+
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
