@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-uls6c-p^3h$=q@xu(flh&383yz&!=i9f^p0*90^1@y@t-umko7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 AUTH_USER_MODEL = 'accounts_lilis.Usuario'
@@ -73,8 +73,8 @@ WSGI_APPLICATION = 'proyecto_lilis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'proyecto_lilis',
-        'USER': 'lilis_admin',
+        'NAME': 'back_end_lilis',
+        'USER': 'lilis_back_end',
         'PASSWORD': 'lilisuser1234',
         'HOST': 'localhost',
         'PORT': '3306',
