@@ -18,12 +18,18 @@
   {% endif %}
 
   <div class="card shadow-lg p-3 p-md-4" style="overflow:hidden;">
+
+
+    <!-- 🔥 BOTÓN AGREGAR SOLO PARA ADMIN -->
     <div class="row g-2 align-items-center mb-3">
+
+      {% if usuarios_crear %}
       <div class="col-12 col-md-3">
         <a href="{% url 'accounts_lilis:usuario_agregar' %}" class="btn btn-danger w-100 fw-bold">
           + Agregar Usuario
         </a>
       </div>
+      {% endif %}
 
       <div class="col-6 col-md-2">
         <select id="filtroRol" class="form-select">
@@ -66,6 +72,10 @@
       </div>
     </div>
 
+
+
+
+    <!-- TABLA -->
     <div class="table-responsive">
       <table id="tablaUsuarios" class="table table-hover align-middle mb-0">
         <thead class="text-white" style="background-color:#B22222;">
@@ -73,9 +83,13 @@
             <th style="width:60px;">#</th>
             <th>Usuario</th>
             <th>Nombre</th>
+            <th>Teléfono</th>
             <th>Correo</th>
             <th>Rol</th>
             <th>Estado</th>
+            <th>MFA</th>
+            <th>Último Acceso</th>
+            <th>Sesiones</th>
             <th class="text-end" style="width:140px;">Acciones</th>
           </tr>
         </thead>
@@ -85,13 +99,23 @@
             data-rol="{{ u.get_rol_display }}"
             data-estado="{{ u.estado }}"
             data-search="{{ u.username }} {{ u.first_name }} {{ u.last_name }} {{ u.email }} {{ u.get_rol_display }} {{ u.estado }}">
+
             <td class="text-muted"></td>
+
             <td class="text-nowrap">{{ u.username }}</td>
+
             <td>{{ u.first_name }} {{ u.last_name }}</td>
+
+            <td class="text-nowrap">
+              {{ u.telefono|default:"—" }}
+            </td>
+
             <td class="text-nowrap">{{ u.email }}</td>
+
             <td class="text-nowrap">
               <span class="badge bg-dark">{{ u.get_rol_display }}</span>
             </td>
+
             <td class="text-nowrap">
               {% if u.estado == "ACTIVO" %}
                 <span class="badge bg-success">Activo</span>
@@ -101,9 +125,37 @@
                 <span class="badge bg-secondary">Inactivo</span>
               {% endif %}
             </td>
-            <td class="text-end text-nowrap">
-              <a href="{% url 'accounts_lilis:usuario_editar' u.id %}" class="btn btn-warning btn-sm me-1">Editar</a>
 
+            <td>
+              {% if u.mfa_habilitado %}
+                <span class="badge bg-success">Sí</span>
+              {% else %}
+                <span class="badge bg-secondary">No</span>
+              {% endif %}
+            </td>
+
+            <td>
+              {% if u.ultimo_acceso %}
+                {{ u.ultimo_acceso|date:"Y-m-d H:i" }}
+              {% else %}
+                —
+              {% endif %}
+            </td>
+
+            <td class="text-center">
+              {{ u.sesiones_activas }}
+            </td>
+
+            <td class="text-end text-nowrap">
+
+              {% if usuarios_editar %}
+              <a href="{% url 'accounts_lilis:usuario_editar' u.id %}"
+                class="btn btn-warning btn-sm me-1">
+                Editar
+              </a>
+              {% endif %}
+
+              {% if usuarios_eliminar %}
               <button type="button"
                       class="btn btn-danger btn-sm"
                       data-bs-toggle="modal"
@@ -112,13 +164,20 @@
                       data-username="{{ u.username }}">
                 Eliminar
               </button>
+              {% endif %}
+
             </td>
+
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
 
+
+
+
+    <!-- PAGINACIÓN -->
     <div class="d-flex justify-content-between align-items-center pt-3">
       <div class="small text-muted" id="pagerInfo"></div>
       <div class="btn-group">
@@ -129,6 +188,10 @@
   </div>
 </div>
 
+
+
+
+<!-- MODAL ELIMINAR -->
 <div class="modal fade" id="confirmEliminarModal" tabindex="-1" aria-labelledby="confirmEliminarLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -151,7 +214,16 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+<!-- JS FUNCIONAL (NO SE MODIFICA) -->
 <script>
+// ... se mantiene todo igual ...
 document.addEventListener("DOMContentLoaded", () => {
   const tbody = document.querySelector("#tablaUsuarios tbody");
   const rows = Array.from(tbody.querySelectorAll("tr"));

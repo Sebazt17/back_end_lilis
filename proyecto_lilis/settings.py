@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-uls6c-p^3h$=q@xu(flh&383yz&!=i9f^p0*90^1@y@t-umko7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 AUTH_USER_MODEL = 'accounts_lilis.Usuario'
@@ -35,11 +35,13 @@ INSTALLED_APPS = [
     'catalogo',
     'proveedores',
     'accounts_lilis',
+    'inventario',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'accounts_lilis.middleware.NoCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -73,15 +75,12 @@ WSGI_APPLICATION = 'proyecto_lilis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'back_end_lilis',
-        'USER': 'lilis_back_end',
+        'NAME': 'proyecto_lilis',
+        'USER': 'lilis_admin',
         'PASSWORD': 'lilisuser1234',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
-        'OPTIONS': {
-            'init_command':'SET sql_mode ="STRICT_ALL_TABLES"',
-        },
-    },
+    }
 }
 
 
