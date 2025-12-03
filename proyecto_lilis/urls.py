@@ -11,6 +11,10 @@ urlpatterns = [
     path('mantenedores/', catalogo_views.mantenedores, name="mantenedores"),
     path('inventario/', include(('inventario.urls', 'inventario'), namespace='inventario')),
 
+    # --- NUEVA RUTA API (EVA 4) ---
+    # Esto habilita: /api/productos, /api/token, etc.
+    path('api/', include('api.urls')),
+
     path('', include('catalogo.urls')),
 ]
 

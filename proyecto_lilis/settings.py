@@ -36,9 +36,14 @@ INSTALLED_APPS = [
     'proveedores',
     'accounts_lilis',
     'inventario',
+    'api',
+    'rest_framework',              
+    'rest_framework_simplejwt',    
+    'corsheaders',                 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'accounts_lilis.middleware.NoCacheMiddleware',
@@ -75,8 +80,8 @@ WSGI_APPLICATION = 'proyecto_lilis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'proyecto_lilis',
-        'USER': 'lilis_admin',
+        'NAME': 'back_end_lilis',
+        'USER': 'usuario_back_end',
         'PASSWORD': 'lilisuser1234',
         'HOST': '127.0.0.1',
         'PORT': '3306',
@@ -143,3 +148,20 @@ PASSWORD_RESET_EMAIL_TEMPLATE_NAME = "accounts_lilis/password_reset_email.html"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# ==========================================
+# CONFIGURACIÓN DJANGO REST FRAMEWORK 
+# ==========================================
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
