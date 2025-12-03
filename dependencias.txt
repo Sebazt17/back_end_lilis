@@ -5,3 +5,5 @@ django-crispy-forms
 crispy-bootstrap5
 djangorestframework
 openpyxl
+djangorestframework-simplejwt
+django-cors-headers

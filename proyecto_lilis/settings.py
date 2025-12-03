@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-uls6c-p^3h$=q@xu(flh&383yz&!=i9f^p0*90^1@y@t-umko7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 AUTH_USER_MODEL = 'accounts_lilis.Usuario'
