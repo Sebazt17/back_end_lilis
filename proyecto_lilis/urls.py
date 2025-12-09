@@ -15,6 +15,10 @@ urlpatterns = [
     # Esto habilita: /api/productos, /api/token, etc.
     path('api/', include('api.urls')),
 
+    # --- RUTA PARA LOGIN EN NAVEGADOR (DRF) ---
+    # Esto agrega el botón de "Log in" en la esquina de la API visual
+    path('api-auth/', include('rest_framework.urls')),
+
     path('', include('catalogo.urls')),
 ]
 

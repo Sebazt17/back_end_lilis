@@ -157,7 +157,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 1. Autenticación por Token (Para Thunder Client, Postman, Apps)
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        
+        # 2. Autenticación por Sesión (Para que la profe entre desde el Navegador)
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
